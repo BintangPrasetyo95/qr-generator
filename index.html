@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bintang's QR</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+    </div>
+    
+    <main class="container">
+        <header>
+            <h1>BintangPrasetyo's QR Generator</h1>
+            <p>Generate high-quality QR codes instantly.</p>
+        </header>
+
+        <!-- Initial State: Input -->
+        <section id="state-input" class="glass-card active">
+            <div class="input-group">
+                <label for="link-input">Enter URL or Text</label>
+                <input type="text" id="link-input" placeholder="https://example.com" autocomplete="off">
+            </div>
+            
+            <div class="settings-group">
+                <div class="setting">
+                    <label for="color-dark">QR Color</label>
+                    <input type="color" id="color-dark" value="#000000">
+                </div>
+                <div class="setting">
+                    <label for="color-light">Background Color</label>
+                    <input type="color" id="color-light" value="#ffffff">
+                </div>
+                <div class="setting">
+                    <label for="error-correction">Error Correction</label>
+                    <select id="error-correction">
+                        <option value="L">Low (7%)</option>
+                        <option value="M">Medium (15%)</option>
+                        <option value="Q">Quartile (25%)</option>
+                        <option value="H" selected>High (30%)</option>
+                    </select>
+                </div>
+            </div>
+
+            <button id="generate-btn" class="primary-btn">
+                <span>Generate QR Code</span>
+                <div class="btn-stripes"></div>
+            </button>
+        </section>
+
+        <!-- Processing State -->
+        <section id="state-processing" class="glass-card hidden">
+            <div class="spinner"></div>
+            <p>Generating...</p>
+        </section>
+
+        <!-- Result State -->
+        <section id="state-result" class="glass-card hidden">
+            <div class="qr-container">
+                <canvas id="qr-canvas"></canvas>
+            </div>
+            
+            <div class="action-buttons">
+                <button id="download-btn" class="primary-btn">
+                    <span>Download PNG</span>
+                    <div class="btn-stripes"></div>
+                </button>
+                <button id="reset-btn" class="secondary-btn">
+                    <span>Generate Another</span>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
