@@ -16,17 +16,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const qrCanvas = document.getElementById('qr-canvas');
 
     // Switch between states
-    function switchState(newStateId) {
+    function switchState(newStateEl) {
         [stateInput, stateProcessing, stateResult].forEach(el => {
-            el.classList.remove('active');
             el.classList.add('hidden');
         });
         
-        const activeState = document.getElementById(newStateId);
-        activeState.classList.remove('hidden');
-        // trigger reflow for animation
-        void activeState.offsetWidth;
-        activeState.classList.add('active');
+        newStateEl.classList.remove('hidden');
     }
 
     // Delay function to simulate processing and allow UI to render
@@ -37,15 +32,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const url = linkInput.value.trim();
         
         if (!url) {
-            linkInput.classList.add('input-error');
-            setTimeout(() => linkInput.classList.remove('input-error'), 400);
+            // Use border color red for error mimicking
+            linkInput.style.borderColor = 'var(--red)';
+            setTimeout(() => linkInput.style.borderColor = '', 400);
             return;
         }
 
         // Switch to processing state
-        switchState('state-processing');
+        switchState(stateProcessing);
 
-        // Simulate some processing time for UX (so it doesn't just instantly snap)
+        // Simulate some processing time for UX
         await sleep(600);
 
         const darkColor = colorDarkInput.value;
@@ -54,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             await QRCode.toCanvas(qrCanvas, url, {
-                width: 1000,
+                width: 500,
                 margin: 2,
                 color: {
                     dark: darkColor,
@@ -64,11 +60,11 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             // Switch to result state
-            switchState('state-result');
+            switchState(stateResult);
         } catch (err) {
             console.error('Error generating QR code:', err);
             alert('Failed to generate QR code. Please try again.');
-            switchState('state-input');
+            switchState(stateInput);
         }
     });
 
@@ -82,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Reset and Generate Another
     resetBtn.addEventListener('click', () => {
-        switchState('state-input');
+        switchState(stateInput);
         linkInput.value = '';
         linkInput.focus();
     });

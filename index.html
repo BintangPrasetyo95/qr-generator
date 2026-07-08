@@ -1,82 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bintang's QR</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bintang's QR</title>
+  <meta name="description" content="BintangPrasetyo's QR Generator" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐝</text></svg>">
 </head>
 <body>
-    <div class="background-orbs">
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
+
+<!-- Background orbs -->
+<div class="bg-orb orb1"></div>
+<div class="bg-orb orb2"></div>
+<div class="bg-orb orb3"></div>
+
+<div class="app-container">
+
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <!-- Using a generic square/qr icon shape -->
+          <rect x="3" y="3" width="7" height="7"></rect>
+          <rect x="14" y="3" width="7" height="7"></rect>
+          <rect x="14" y="14" width="7" height="7"></rect>
+          <rect x="3" y="14" width="7" height="7"></rect>
+        </svg>
+      </div>
+      <span class="logo-text"><span class="logo-owner">BintangPrasetyo's</span> <span class="logo-accent">QR Generator</span></span>
     </div>
-    
-    <main class="container">
-        <header>
-            <h1>BintangPrasetyo's QR Generator</h1>
-            <p>Generate high-quality QR codes instantly.</p>
-        </header>
+    <div class="header-badge">Instant Generation</div>
+  </header>
 
-        <!-- Initial State: Input -->
-        <section id="state-input" class="glass-card active">
-            <div class="input-group">
-                <label for="link-input">Enter URL or Text</label>
-                <input type="text" id="link-input" placeholder="https://example.com" autocomplete="off">
+  <!-- Hero -->
+  <section class="hero">
+    <h1 class="hero-title">Generate High-Quality <span class="gradient-text">QR Codes</span></h1>
+    <p class="hero-subtitle">Enter a link, customize colors, and get your QR code instantly—all done in your browser.</p>
+  </section>
+
+  <!-- Main Card -->
+  <main class="main-card glass">
+
+    <!-- Input State -->
+    <div id="state-input">
+      <!-- Instead of dropzone, a link input styled nicely -->
+      <div class="setting-group" style="margin-bottom: 24px;">
+        <label class="setting-label" for="link-input">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px">
+            <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"></path>
+            <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"></path>
+          </svg>
+          Enter URL or Text
+        </label>
+        <div class="size-input-group">
+          <input type="text" id="link-input" class="size-input" placeholder="https://example.com" autocomplete="off" />
+        </div>
+      </div>
+
+      <!-- Settings Panel mimicking the original UI -->
+      <div class="settings-panel" style="margin-top: 0; padding-top: 0; border-top: none; display: block; animation: none;">
+        <div class="settings-row" style="grid-template-columns: 1fr 1fr 1fr;">
+          <div class="setting-group">
+            <label class="setting-label" for="color-dark">QR Color</label>
+            <div class="size-input-group" style="padding: 4px;">
+              <input type="color" id="color-dark" value="#000000" style="width: 100%; height: 38px; border: none; background: transparent; cursor: pointer;">
             </div>
-            
-            <div class="settings-group">
-                <div class="setting">
-                    <label for="color-dark">QR Color</label>
-                    <input type="color" id="color-dark" value="#000000">
-                </div>
-                <div class="setting">
-                    <label for="color-light">Background Color</label>
-                    <input type="color" id="color-light" value="#ffffff">
-                </div>
-                <div class="setting">
-                    <label for="error-correction">Error Correction</label>
-                    <select id="error-correction">
-                        <option value="L">Low (7%)</option>
-                        <option value="M">Medium (15%)</option>
-                        <option value="Q">Quartile (25%)</option>
-                        <option value="H" selected>High (30%)</option>
-                    </select>
-                </div>
+          </div>
+          <div class="setting-group">
+            <label class="setting-label" for="color-light">Background</label>
+            <div class="size-input-group" style="padding: 4px;">
+              <input type="color" id="color-light" value="#ffffff" style="width: 100%; height: 38px; border: none; background: transparent; cursor: pointer;">
             </div>
+          </div>
+          <div class="setting-group">
+            <label class="setting-label" for="error-correction">Error Correction</label>
+            <select id="error-correction" class="unit-select" style="width: 100%; border-left: none; border-radius: var(--radius-sm); text-align: center;">
+              <option value="L">Low (7%)</option>
+              <option value="M">Medium (15%)</option>
+              <option value="Q">Quartile (25%)</option>
+              <option value="H" selected>High (30%)</option>
+            </select>
+          </div>
+        </div>
 
-            <button id="generate-btn" class="primary-btn">
-                <span>Generate QR Code</span>
-                <div class="btn-stripes"></div>
-            </button>
-        </section>
+        <button id="generate-btn" class="btn-compress" style="margin-top: 10px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px">
+            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+          </svg>
+          Generate QR Code
+        </button>
+      </div>
+    </div>
 
-        <!-- Processing State -->
-        <section id="state-processing" class="glass-card hidden">
-            <div class="spinner"></div>
-            <p>Generating...</p>
-        </section>
+    <!-- Processing State -->
+    <div id="state-processing" class="progress-panel hidden">
+      <div class="progress-header">
+        <div class="progress-status">
+          <div class="spinner"></div>
+          <span id="progressLabel">Generating QR Code...</span>
+        </div>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" style="width:100%"></div>
+      </div>
+    </div>
 
-        <!-- Result State -->
-        <section id="state-result" class="glass-card hidden">
-            <div class="qr-container">
-                <canvas id="qr-canvas"></canvas>
-            </div>
-            
-            <div class="action-buttons">
-                <button id="download-btn" class="primary-btn">
-                    <span>Download PNG</span>
-                    <div class="btn-stripes"></div>
-                </button>
-                <button id="reset-btn" class="secondary-btn">
-                    <span>Generate Another</span>
-                </button>
-            </div>
-        </section>
-    </main>
+    <!-- Result State -->
+    <div id="state-result" class="result-panel hidden">
+      <div class="result-icon success" style="padding: 10px; width: auto; height: auto; border-radius: var(--radius-sm);">
+        <canvas id="qr-canvas" style="max-width: 100%; height: auto !important; border-radius: 8px;"></canvas>
+      </div>
+      
+      <div class="result-info">
+        <h3>QR Generated!</h3>
+        <p>Your custom QR code is ready.</p>
+      </div>
+      
+      <div class="result-actions">
+        <button id="download-btn" class="btn-download">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px">
+            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          Download PNG
+        </button>
+        <button id="reset-btn" class="btn-secondary">Generate Another</button>
+      </div>
+    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
-    <script src="app.js"></script>
+  </main>
+
+  <!-- How it works -->
+  <section class="how-it-works">
+    <h2 class="section-title">How It Works</h2>
+    <div class="steps-grid" style="grid-template-columns: repeat(3, 1fr);">
+      <div class="step-card glass">
+        <div class="step-num">01</div>
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"></path>
+            <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"></path>
+          </svg>
+        </div>
+        <h3>Enter Link</h3>
+        <p>Type or paste any URL or text</p>
+      </div>
+      <div class="step-card glass">
+        <div class="step-num">02</div>
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M4.93 4.93l1.41 1.41M21 12h-2M5 12H3m15.07 7.07l-1.41-1.41M6.34 17.66l-1.41 1.41M12 21v-2m0-14V3"/>
+          </svg>
+        </div>
+        <h3>Customize</h3>
+        <p>Set colors and error correction</p>
+      </div>
+      <div class="step-card glass">
+        <div class="step-num">03</div>
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+        </div>
+        <h3>Download</h3>
+        <p>Get your QR code instantly</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>BintangPrasetyo's QR Generator &middot; All processing done <strong>100% in your browser</strong>.</p>
+  </footer>
+
+</div>
+
+<!-- Libraries -->
+<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+<script src="app.js"></script>
+
 </body>
 </html>
